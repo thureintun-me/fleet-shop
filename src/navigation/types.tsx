@@ -1,4 +1,4 @@
-import {NativeStackScreenProps} from "@react-navigation/native-stack";
+import {NativeStackNavigationOptions, NativeStackScreenProps} from "@react-navigation/native-stack";
 
 export type HomeStackParamsList = {
  Home : undefined,
@@ -6,3 +6,7 @@ export type HomeStackParamsList = {
 
 export type HomeStackScreenProps<T extends keyof HomeStackParamsList> =
     NativeStackScreenProps<HomeStackParamsList, T>;
+
+export const options: NativeStackNavigationOptions = {
+ headerShown: false,
+};
