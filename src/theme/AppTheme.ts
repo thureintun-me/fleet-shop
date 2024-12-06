@@ -55,7 +55,7 @@ export const AppDarkTheme: AppTheme = {
                 fontWeight: 'normal',
             },
             bold: {
-                fontFamily: 'Roboto-Bold',
+                fontFamily: 'YujiMai-Regular',
                 fontWeight: '600',
             },
             heavy: {
