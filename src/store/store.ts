@@ -1,12 +1,15 @@
-import { create } from 'zustand'
+import {create} from 'zustand'
+import {ThemeType} from "../types/AppThemeType";
 
-export interface BearState {
-    bears: number
-    increase: (by: number) => void
+
+export interface FleetAppSate {
+    theme: ThemeType,
+    setTheme: (theme: ThemeType) => void;
 }
- const useBearStore = create<BearState>()((set) => ({
-    bears: 0,
-    increase: (by) => set((state) => ({ bears: state.bears + by })),
+
+const useFleetAppStore = create<FleetAppSate>()((set) => ({
+    theme: "default",
+    setTheme: (theme: ThemeType) => set({theme}),
 }))
 
-export default useBearStore;
+export default useFleetAppStore;

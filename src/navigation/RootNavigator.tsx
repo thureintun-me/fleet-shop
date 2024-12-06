@@ -1,13 +1,18 @@
 import React from "react";
-import {NavigationContainer} from "@react-navigation/native";
+import {NavigationContainer, useTheme,} from "@react-navigation/native";
 import HomeStack from "@navigation/stack/HomeStack";
+import useAppTheme from "@hooks/useAppTheme";
+import UnAuthorizeStack from "@navigation/stack/UnAuthorizeStack";
 
 
 const RootNavigator = () => {
 
+
+    const theme = useAppTheme();
+
     return (
-        <NavigationContainer>
-            <HomeStack/>
+        <NavigationContainer theme={theme}>
+            <UnAuthorizeStack/>
         </NavigationContainer>
     )
 }
