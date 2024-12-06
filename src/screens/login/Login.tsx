@@ -9,7 +9,7 @@ const Login = ({navigation, route}: UnAuthorizeStackScreenProps<"Login">) => {
     console.log("FONTS ===>",fonts.bold)
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={{color: colors.primary, fontFamily:"Inter 18pt"}}>Login</Text>
+            <Text style={{color: colors.primary, ...fonts.bold}}>Login</Text>
         </SafeAreaView>
     )
 }

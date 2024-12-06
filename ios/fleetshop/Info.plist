@@ -57,6 +57,10 @@
       <string>Inter_18pt-Regular.ttf</string>
       <string>Inter_18pt-SemiBold.ttf</string>
       <string>Inter_24pt-ExtraBold.ttf</string>
+      <string>Roboto-Bold.ttf</string>
+      <string>YujiMai-Regular.ttf</string>
+      <string>Roboto-Medium.ttf</string>
+      <string>Roboto-Regular.ttf</string>
     </array>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>

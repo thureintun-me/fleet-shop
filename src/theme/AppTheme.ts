@@ -13,26 +13,25 @@ export const AppLightTheme: AppTheme = {
         notification: 'rgb(255, 69, 58)',
     },
     fonts: Platform.select({
-            default: {
-                regular: {
-                    fontFamily: 'Inter 18pt',
-                    fontWeight: 'normal',
-                },
-                medium: {
-                    fontFamily: 'Inter 18pt',
-                    fontWeight: 'normal',
-                },
-                bold: {
-                    fontFamily: 'Inter 18pt',
-                    fontWeight: '600',
-                },
-                heavy: {
-                    fontFamily: 'Inter 18pt',
-                    fontWeight: '700',
-                },
-            }
+        default: {
+            regular: {
+                fontFamily: 'Roboto-Regular',
+                fontWeight: 'normal',
+            },
+            medium: {
+                fontFamily: 'Roboto-Medium',
+                fontWeight: 'normal',
+            },
+            bold: {
+                fontFamily: 'Roboto-Bold',
+                fontWeight: '600',
+            },
+            heavy: {
+                fontFamily: 'Roboto-Regular',
+                fontWeight: '700',
+            },
         }
-    )
+    })
 }
 
 export const AppDarkTheme: AppTheme = {
@@ -48,19 +47,19 @@ export const AppDarkTheme: AppTheme = {
     fonts: Platform.select({
         default: {
             regular: {
-                fontFamily: 'Inter 18pt',
+                fontFamily: 'Roboto-Regular',
                 fontWeight: 'normal',
             },
             medium: {
-                fontFamily: 'Inter 18pt',
+                fontFamily: 'Roboto-Medium',
                 fontWeight: 'normal',
             },
             bold: {
-                fontFamily: 'Inter 18pt',
+                fontFamily: 'Roboto-Bold',
                 fontWeight: '600',
             },
             heavy: {
-                fontFamily: 'Inter 18pt',
+                fontFamily: 'Roboto-Regular',
                 fontWeight: '700',
             },
         }
