@@ -9,6 +9,7 @@ export interface ThemeColors {
     text: string;
     border: string;
     notification: string;
+    error: string,
 }
 
 export interface AppTheme extends Theme {
