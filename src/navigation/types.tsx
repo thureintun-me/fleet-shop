@@ -4,6 +4,7 @@ import React from "react";
 
 export type HomeStackParamsList = {
  HomeScreen : undefined,
+ DetailsScreen : {productId : number}
 }
 export type AccountStackParamsList = {
  AccountScreen : undefined,

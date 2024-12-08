@@ -1,19 +1,23 @@
 import {Product} from "../types/ProductType";
-import {Image, StyleSheet, Text, View} from "react-native";
+import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {Star} from "lucide-react-native";
 import React from "react";
-import {useTheme} from "@react-navigation/native";
+import {useNavigation, useTheme} from "@react-navigation/native";
 
+interface CardItemProps extends Product {
+    onPress: (id : number) => void; // Define the onPress prop
+}
 
-const CardItem : React.FC<Product> = (product:Product) =>{
+const CardItem : React.FC<CardItemProps> = (props ) =>{
     const {colors,fonts} = useTheme();
+    const { id, title, description, price,images,rating,stock, onPress } = props;
     return (
-        <View key={product.id} style={{
+        <View key={id} style={{
             width: "48%",
 
 
         }}>
-            <View style={{
+            <TouchableOpacity onPress={()=>onPress(id)} style={{
                 backgroundColor: colors.card,
                 elevation: 1,
                 paddingHorizontal: 16,
@@ -21,7 +25,7 @@ const CardItem : React.FC<Product> = (product:Product) =>{
                 borderRadius: 8,
             }}>
                 <Image source={{
-                    uri: product.images[0],
+                    uri: images[0],
                 }}
                        resizeMode={'contain'}
                        style={{
@@ -29,14 +33,14 @@ const CardItem : React.FC<Product> = (product:Product) =>{
                            height: 200,
                        }}/>
                 <View style={styles.itemInfoContainer}>
-                    <Text numberOfLines={3} style={{...fonts.regular}}>{product.title}</Text>
-                    <Text style={{...fonts.regular, color: colors.primary}}>$ {product.price}</Text>
+                    <Text numberOfLines={3} style={{...fonts.regular}}>{title}</Text>
+                    <Text style={{...fonts.regular, color: colors.primary}}>$ {price}</Text>
 
                     <View
                         style={{flexDirection: "row", justifyContent: 'flex-start', alignItems: 'center'}}>
                         <View style={{flexDirection: "row", alignItems: 'center'}}>
                             <Star size={14} color={"gold"}/>
-                            <Text style={{...fonts.regular,}}> {product.rating}</Text>
+                            <Text style={{...fonts.regular,}}> {rating}</Text>
                         </View>
                         <View style={{
                             height: 15,
@@ -50,14 +54,14 @@ const CardItem : React.FC<Product> = (product:Product) =>{
 
                         </View>
                         <View style={{}}>
-                            <Text style={{...fonts.regular,}}> {product.stock} left</Text>
+                            <Text style={{...fonts.regular,}}> {stock} left</Text>
                         </View>
 
                     </View>
                 </View>
 
 
-            </View>
+            </TouchableOpacity>
 
 
         </View>

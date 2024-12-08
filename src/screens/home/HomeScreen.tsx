@@ -24,6 +24,12 @@ const HomeScreen = ({navigation, route}: HomeStackScreenProps<'HomeScreen'>) => 
 
     }
 
+    const navigateToDetails = (id : number) => {
+        navigation.navigate("DetailsScreen",{
+            productId:id
+        });
+    }
+
 
     return (
         <SafeAreaView style={{...styles.container, backgroundColor: colors.background}}>
@@ -47,7 +53,7 @@ const HomeScreen = ({navigation, route}: HomeStackScreenProps<'HomeScreen'>) => 
                 ItemSeparatorComponent={ItemSeparator}
                 renderItem={({item, index}) => (
 
-                    <CardItem {...item} />
+                    <CardItem {...item} onPress={navigateToDetails}/>
 
                 )}
                 ListFooterComponent={() => (
