@@ -33,14 +33,14 @@ const CardItem : React.FC<CardItemProps> = (props ) =>{
                            height: 200,
                        }}/>
                 <View style={styles.itemInfoContainer}>
-                    <Text numberOfLines={3} style={{...fonts.regular}}>{title}</Text>
+                    <Text numberOfLines={3} style={{...fonts.regular,color:colors.text}}>{title}</Text>
                     <Text style={{...fonts.regular, color: colors.primary}}>$ {price}</Text>
 
                     <View
                         style={{flexDirection: "row", justifyContent: 'flex-start', alignItems: 'center'}}>
                         <View style={{flexDirection: "row", alignItems: 'center'}}>
                             <Star size={14} color={"gold"}/>
-                            <Text style={{...fonts.regular,}}> {rating}</Text>
+                            <Text style={{...fonts.regular,color:colors.text}}> {rating}</Text>
                         </View>
                         <View style={{
                             height: 15,
@@ -54,7 +54,7 @@ const CardItem : React.FC<CardItemProps> = (props ) =>{
 
                         </View>
                         <View style={{}}>
-                            <Text style={{...fonts.regular,}}> {stock} left</Text>
+                            <Text style={{...fonts.regular,color:colors.text}}> {stock} left</Text>
                         </View>
 
                     </View>

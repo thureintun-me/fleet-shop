@@ -54,20 +54,25 @@ export const AppDarkTheme: AppTheme = {
     fonts: Platform.select({
         default: {
             regular: {
-                fontFamily: 'Roboto-Regular',
+                fontFamily: 'Roboto-Medium',
                 fontWeight: 'normal',
+                fontSize: 13,
             },
             medium: {
                 fontFamily: 'Roboto-Medium',
                 fontWeight: 'normal',
+                fontSize: 16,
             },
             bold: {
-                fontFamily: 'YujiMai-Regular',
+                fontFamily: 'Roboto-Bold',
                 fontWeight: '600',
+                fontSize: 23,
+                letterSpacing: 0.8
             },
             heavy: {
                 fontFamily: 'Roboto-Regular',
                 fontWeight: '700',
+                fontSize: 26,
             },
         }
     })

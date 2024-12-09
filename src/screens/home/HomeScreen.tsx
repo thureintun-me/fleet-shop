@@ -43,7 +43,7 @@ const HomeScreen = ({navigation, route}: HomeStackScreenProps<'HomeScreen'>) => 
                 numColumns={2}
                 style={{
                     flex: 1,
-                    paddingVertical: 20
+                    paddingVertical: 20,
                 }}
                 onEndReached={getMoreProducts}
                 onEndReachedThreshold={0.8} //
@@ -72,7 +72,7 @@ const styles = StyleSheet.create(
     {
         container: {
             flex: 1,
-            padding: 16,
+            margin: 16,
         },
         separator: {
             height: 30,

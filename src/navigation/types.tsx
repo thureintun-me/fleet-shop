@@ -1,6 +1,7 @@
 import {NativeStackNavigationOptions, NativeStackScreenProps,} from "@react-navigation/native-stack";
 import HeaderLeft from "@components/HeaderLeft";
 import React from "react";
+import ThemeScreen from "@screens/theme/ThemeScreen";
 
 export type HomeStackParamsList = {
  HomeScreen : undefined,
@@ -8,6 +9,7 @@ export type HomeStackParamsList = {
 }
 export type AccountStackParamsList = {
  AccountScreen : undefined,
+ ThemeScreen : undefined
 }
 
 export type CartStackParamsList = {

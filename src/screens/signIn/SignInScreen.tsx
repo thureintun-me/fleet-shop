@@ -98,7 +98,7 @@ const SignIn = ({navigation, route}: UnAuthorizeStackScreenProps<"SignInScreen">
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1, paddingHorizontal: 16,
+        flex: 1, marginHorizontal: 16,
     }, titleContainer: {
         flex: 0.7, justifyContent: "flex-end", alignItems: "center",
     },
