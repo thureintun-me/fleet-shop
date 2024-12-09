@@ -26,7 +26,7 @@ const ProductDetails = ({navigation, route}: HomeStackScreenProps<"DetailsScreen
 
                         <View style={{
                             paddingHorizontal:8,
-                            paddingVertical:3,
+                            paddingVertical:8,
                             backgroundColor:colors.primary,
                             borderRadius:8,
                         }}>

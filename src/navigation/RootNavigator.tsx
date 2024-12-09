@@ -17,7 +17,6 @@ const RootNavigator = () => {
             <RootStack.Navigator screenOptions={{
                 headerShown: false,
             }}>
-
                 <RootStack.Screen name="MainTabs" component={AppBottomTabNavigator}/>
                 <RootStack.Screen name="Unauthorized" component={UnAuthorizeStack}/>
             </RootStack.Navigator>

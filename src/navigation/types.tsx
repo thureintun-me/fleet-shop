@@ -2,6 +2,12 @@ import {NativeStackNavigationOptions, NativeStackScreenProps,} from "@react-navi
 import HeaderLeft from "@components/HeaderLeft";
 import React from "react";
 import ThemeScreen from "@screens/theme/ThemeScreen";
+import {NavigatorScreenParams} from "@react-navigation/native";
+
+export type RootStackParamList = {
+ MainTabs: undefined;
+ Unauthorized: NavigatorScreenParams<UnAuthorizeStackParamsList>;
+};
 
 export type HomeStackParamsList = {
  HomeScreen : undefined,
