@@ -39,6 +39,7 @@ const ProductCartItem: React.FC<Product> = (product: Product) => {
                     <Image source={{uri: images[0]}} style={{
                         width: 70,
                         height: 70,
+                        resizeMode :'contain'
                     }}/>
                 </View>
 

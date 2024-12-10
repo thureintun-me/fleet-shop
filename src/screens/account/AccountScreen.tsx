@@ -4,12 +4,18 @@ import {useTheme} from "@react-navigation/native";
 import AccountWelcome from "@screens/account/comnponents/AccountWelcome";
 import AccountMenu from "@screens/account/comnponents/AccountMenu";
 import AppInfoMenu from "@screens/account/comnponents/AppInfoMenu";
+import useFleetAppStore from "@store/store";
+import React from "react";
+import AppButton from "@components/AppButton";
+import ProfileCard from "@screens/account/comnponents/ProfileCard";
+import {supabase} from "../../libs/supabase";
+import {resetToHome} from "@utils/navigationRef";
 
 const AccountScreen = ({navigation, route}:AccountStackScreenProps<"AccountScreen">) =>{
 
     const {colors,fonts} = useTheme();
-
-
+    const session = useFleetAppStore((state) => state.session);
+    const clearCart =  useFleetAppStore((state) => state.clearCart);
     const goToTheme = () =>{
         navigation.navigate("ThemeScreen");
     }
@@ -26,7 +32,10 @@ const AccountScreen = ({navigation, route}:AccountStackScreenProps<"AccountScree
     return(
         <SafeAreaView style={{...styles.container,backgroundColor:colors.background}}>
 
-            <AccountWelcome />
+            {
+                session ?   <ProfileCard /> : <AccountWelcome />
+            }
+
             <ScrollView
                 contentContainerStyle={{
                     gap:20
@@ -41,6 +50,18 @@ const AccountScreen = ({navigation, route}:AccountStackScreenProps<"AccountScree
                 <AppInfoMenu title={"Mail Us"} value={"thureintun.me@gmail.com"} onPress={goToEmail} />
             </ScrollView>
 
+            {
+                session  && <View style={{
+                    marginVertical : 30,
+                    marginHorizontal:100
+                }}>
+                <AppButton title={"Logout"} onPress={()=>{
+                    supabase.auth.signOut()
+                    resetToHome();
+                    clearCart();
+                }} />
+                </View>
+            }
 
 
         </SafeAreaView>

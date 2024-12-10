@@ -1,4 +1,4 @@
-import {SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {useTheme} from "@react-navigation/native";
 import {UnAuthorizeStackScreenProps} from "@navigation/types";
 import AppTitle from "@components/AppTitle";
@@ -7,8 +7,11 @@ import NameInput from "@components/NameInput";
 import {Controller, useForm} from "react-hook-form";
 import AppButton from "@components/AppButton";
 import ErrorMessage from "@components/ErrorMessage";
-import React from "react";
+import React, {useState} from "react";
 import {validateEmailOrPhone} from "../../utils/validator";
+import {supabase} from "../../libs/supabase";
+import Loading from "@screens/loading/Loading";
+import {resetToHome} from "@utils/navigationRef";
 
 type FormData = {
     emailOrPhone: string;
@@ -18,15 +21,33 @@ type FormData = {
 const SignIn = ({navigation, route}: UnAuthorizeStackScreenProps<"SignInScreen">) => {
     const {colors, fonts} = useTheme();
     const { control, handleSubmit, formState :{errors} } = useForm<FormData>();
-
+    const [loading, setLoading] = useState(false)
     const goToSignUp = () => {
         navigation.navigate("SignUpScreen");
 
     }
 
-    const onSubmit = (data: FormData) => {
+
+    const onSubmit = async (data: FormData) => {
         console.log('Form Data:', data);
+        setLoading(true)
+        const { error } = await supabase.auth.signInWithPassword({
+            email: data.emailOrPhone,
+            password: data.password,
+        })
+
+        if (error) Alert.alert(error.message)
+
+
+        setLoading(false)
+        if(!error) resetToHome();
     };
+
+    if(loading){
+        return (
+            <Loading />
+        )
+    }
 
     return (<SafeAreaView style={{...styles.container, backgroundColor: colors.background}}>
         <View style={styles.titleContainer}>
@@ -50,10 +71,10 @@ const SignIn = ({navigation, route}: UnAuthorizeStackScreenProps<"SignInScreen">
                     name="emailOrPhone"
                     control={control}
                     defaultValue=""
-                    rules={{ required: 'Email or Phone is required',validate: validateEmailOrPhone }}
+                    rules={{ required: 'Email  is required',validate: validateEmailOrPhone }}
                     render={({ field: { onChange, value } }) => (
                      <>
-                         <NameInput placeholder="email or phone" value={value} onChangeText={onChange} />
+                         <NameInput placeholder="email" value={value} onChangeText={onChange} />
                          {errors.emailOrPhone &&  <ErrorMessage message={errors.emailOrPhone.message} />}
                      </>
 

@@ -1,5 +1,5 @@
 
-import {SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Alert, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {UnAuthorizeStackScreenProps} from "@navigation/types";
 import AppTitle from "@components/AppTitle";
 import {useTheme} from "@react-navigation/native";
@@ -7,15 +7,17 @@ import NameInput from "@components/NameInput";
 import AppButton from "@components/AppButton";
 import PasswordInput from "@components/PasswordInput";
 import {Controller, useForm} from "react-hook-form";
-import React from "react";
+import React, {useState} from "react";
 import ErrorMessage from "@components/ErrorMessage";
 import {validateEmailOrPhone} from "../../utils/validator";
+import {supabase} from "../../libs/supabase";
+import Loading from "@screens/loading/Loading";
+import {resetToHome} from "@utils/navigationRef";
 
 type FormData = {
     emailOrPhone: string;
     username: string;
     password: string;
-    confirmPassword: string;
 };
 const SignUp = ({navigation, route} : UnAuthorizeStackScreenProps<"SignUpScreen">) => {
     const {colors,fonts} = useTheme();
@@ -23,17 +25,47 @@ const SignUp = ({navigation, route} : UnAuthorizeStackScreenProps<"SignUpScreen"
     const goToSignIn = () =>{
         navigation.navigate("SignInScreen");
     }
+    const [loading, setLoading] = useState(false);
 
-    const onRegister = () => {
-        console.log("On Register");
-    }
 
-    const onSubmit = (data: FormData) => {
-        console.log('Form Data:', data);
+
+    const onSubmit = async (data: FormData) => {
+        setLoading(true)
+        const {
+            data: { session },
+            error,
+        } = await supabase.auth.signUp({
+            email: data.emailOrPhone,
+            password: data.password,
+
+
+        })
+
+        if (error) Alert.alert(error.message)
+        if (!session) Alert.alert('Please check your inbox for email verification!')
+
+        const { error: updateError } = await supabase.auth.updateUser({
+            data: { username: data.username }, // Replace 'username' with the actual field you want to update
+        });
+
+        if (updateError) {
+            console.log("update error",updateError);
+           // Alert.alert(`User created, but updating username failed: ${updateError.message}`);
+        } else {
+            console.log("update success");
+            //Alert.alert('Sign up successful and username updated!');
+        }
+
+        if(!error) resetToHome();
+        setLoading(false)
     };
 
 
-
+    if(loading){
+        return (
+            <Loading />
+        )
+    }
     return (
         <SafeAreaView style={{...styles.container,backgroundColor:colors.background}}>
             <View style={styles.titleContainer}>
@@ -47,10 +79,10 @@ const SignUp = ({navigation, route} : UnAuthorizeStackScreenProps<"SignUpScreen"
                         name="emailOrPhone"
                         control={control}
                         defaultValue=""
-                        rules={{ required: 'Email or Phone is required',validate:validateEmailOrPhone }}
+                        rules={{ required: 'Email is required',validate:validateEmailOrPhone }}
                         render={({ field: { onChange, value } }) => (
                          <>
-                             <NameInput placeholder="email or phone" value={value} onChangeText={onChange} />
+                             <NameInput placeholder="email" value={value} onChangeText={onChange} />
                              {errors.emailOrPhone &&  <ErrorMessage message={errors.emailOrPhone.message} />}
                          </>
 
@@ -83,19 +115,7 @@ const SignUp = ({navigation, route} : UnAuthorizeStackScreenProps<"SignUpScreen"
                         )}
                     />
 
-                    <Controller
-                        name="confirmPassword"
-                        rules={{ required: 'Confirm Password is required' }}
-                        control={control}
-                        defaultValue=""
-                        render={({ field: { onChange, value } }) => (
-                            <>
-                                <PasswordInput placeholder={"confirm password"} value={value} onChangeText={onChange} />
-                                {errors.confirmPassword &&  <ErrorMessage message={errors.confirmPassword.message} />}
-                            </>
 
-                        )}
-                    />
 
 
 

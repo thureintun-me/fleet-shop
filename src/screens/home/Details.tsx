@@ -1,7 +1,7 @@
-import {HomeStackScreenProps} from "@navigation/types";
+import {HomeStackScreenProps, RootStackParamList} from "@navigation/types";
 import {ScrollView, StyleSheet, Text, View} from "react-native";
 import useFetchProductById from "@screens/home/hooks/useFetchProductById";
-import {useTheme} from "@react-navigation/native";
+import {NavigationProp, useNavigation, useTheme} from "@react-navigation/native";
 import ProductPager from "@screens/home/components/ProductPager";
 import AppButton from "@components/AppButton";
 import Loading from "@screens/loading/Loading";
@@ -12,9 +12,9 @@ const ProductDetails = ({navigation, route}: HomeStackScreenProps<"DetailsScreen
 
     const {data: product, isLoading} = useFetchProductById(route.params.productId);
     const {colors, fonts} = useTheme();
-
+    const session = useFleetAppStore((state) => state.session);
     const addToCart = useFleetAppStore((state) => state.addToCart);
-
+    const unAuthNavigation =  useNavigation<NavigationProp<RootStackParamList>>()
     if (isLoading) {
         return (
             <Loading/>
@@ -22,6 +22,12 @@ const ProductDetails = ({navigation, route}: HomeStackScreenProps<"DetailsScreen
     }
 
     const addProductToCart = () =>{
+        if(!session){
+            unAuthNavigation.navigate('Unauthorized',{
+                screen:'SignInScreen'
+            })
+            return;
+        }
         if (product) {
            addToCart(product)
         }

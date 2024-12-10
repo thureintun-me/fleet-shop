@@ -5,6 +5,9 @@ import RootNavigator from "@navigation/RootNavigator";
 import './gesture-handler';
 import * as SplashScreen from 'expo-splash-screen';
 import {useEffect} from "react";
+import useFleetAppStore from "@store/store";
+import {supabase} from "./src/libs/supabase";
+import {resetToHome} from "@utils/navigationRef";
 
 const queryClient = new QueryClient()
 
@@ -22,8 +25,29 @@ export default function App() {
     useEffect(()=>{
         setTimeout(()=>{
             SplashScreen.hide();
-        },3000)
+        },2000)
     },[])
+
+    const clearCart = useFleetAppStore((state) => state.clearCart);
+    const session = useFleetAppStore((state) => state.session);
+    const setSession  = useFleetAppStore((state) => state.setSession);
+
+
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setSession(session)
+
+        })
+
+        supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session)
+
+        })
+    }, [])
+
+    console.log("session ==>",session);
+
+
 
     return (
         <QueryClientProvider client={queryClient}>

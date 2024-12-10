@@ -4,13 +4,16 @@ import AccountStack from "@navigation/stack/AccountStack";
 import CartStack from "@navigation/stack/CartStack";
 import {House, ShoppingCart, User} from "lucide-react-native";
 import useFleetAppStore from "@store/store";
-import {AppTabsParamList} from "@navigation/types";
+import {AppTabsParamList, RootStackParamList} from "@navigation/types";
+import {NavigationProp, useNavigation} from "@react-navigation/native";
 
 
 const Tab = createBottomTabNavigator<AppTabsParamList>();
 const AppBottomTabNavigator = () => {
 
     const cart = useFleetAppStore((state) => state.cart);
+    const session = useFleetAppStore((state) => state.session);
+    const navigation =  useNavigation<NavigationProp<RootStackParamList>>()
     return (
         <Tab.Navigator screenOptions={({route}) => ({
             tabBarIcon: ({focused, color, size}) => {
@@ -46,14 +49,14 @@ const AppBottomTabNavigator = () => {
             }}/>
             <Tab.Screen options={{
                 title: "Cart",
-            }} name="CartTab" component={CartStack}  listeners={({ navigation }) => ({
+            }} name="CartTab" component={CartStack}  listeners={({  }) => ({
                 tabPress: (e) => {
-                    // if (true) {
-                    //     // Prevent default navigation
-                    //     e.preventDefault();
-                    //     // Navigate to Login screen
-                    //     navigation.navigate('Unauthorized', { screen: 'Login' });
-                    // }
+                    if (!session) {
+                        // Prevent default navigation
+                        e.preventDefault();
+                        // Navigate to Login screen
+                        navigation.navigate('Unauthorized', { screen: 'SignInScreen' });
+                    }
                 },
             })}/>
             <Tab.Screen name="AccountTab" component={AccountStack} options={{

@@ -34,7 +34,8 @@ const PasswordInput : React.FC<PasswordInputProps> = ({placeholder,value,onChang
             <TextInput style={{
 
                 flex: 1,
-                ...fonts.regular
+                ...fonts.regular,
+                color: colors.text,
             }}
                        value={value}
                        onChangeText={onChangeText}
