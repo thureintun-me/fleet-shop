@@ -14,7 +14,8 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.thureinme.fleetshop"
+      "bundleIdentifier": "com.thureinme.fleetshop",
+      "appleTeamId": "2ZDVZ8G75G"
     },
     "android": {
       "adaptiveIcon": {
@@ -37,7 +38,8 @@
             "./assets/fonts/Roboto-Regular.ttf"
           ]
         }
-      ]
+      ],
+      "expo-sqlite"
     ],
     "extra": {
       "eas": {

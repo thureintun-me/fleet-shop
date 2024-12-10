@@ -3,10 +3,17 @@ import HeaderLeft from "@components/HeaderLeft";
 import React from "react";
 import ThemeScreen from "@screens/theme/ThemeScreen";
 import {NavigatorScreenParams} from "@react-navigation/native";
+import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 
 export type RootStackParamList = {
- MainTabs: undefined;
+ MainTabs:  NavigatorScreenParams<AppTabsParamList>;
  Unauthorized: NavigatorScreenParams<UnAuthorizeStackParamsList>;
+};
+
+export type AppTabsParamList = {
+ HomeTab: undefined;
+ CartTab: undefined;
+ AccountTab: undefined;
 };
 
 export type HomeStackParamsList = {
@@ -28,7 +35,7 @@ export type UnAuthorizeStackParamsList = {
  SignUpScreen : undefined,
 }
 
-
+export type CartScreenNavigationProp = BottomTabNavigationProp<AppTabsParamList, "CartTab">;
 
 export type AccountStackScreenProps<T extends keyof AccountStackParamsList> =
     NativeStackScreenProps<AccountStackParamsList, T>;

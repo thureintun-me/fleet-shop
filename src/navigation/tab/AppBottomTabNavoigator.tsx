@@ -3,19 +3,22 @@ import HomeStack from "@navigation/stack/HomeStack";
 import AccountStack from "@navigation/stack/AccountStack";
 import CartStack from "@navigation/stack/CartStack";
 import {House, ShoppingCart, User} from "lucide-react-native";
+import useFleetAppStore from "@store/store";
+import {AppTabsParamList} from "@navigation/types";
 
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<AppTabsParamList>();
 const AppBottomTabNavigator = () => {
 
+    const cart = useFleetAppStore((state) => state.cart);
     return (
         <Tab.Navigator screenOptions={({route}) => ({
             tabBarIcon: ({focused, color, size}) => {
 
 
-                if (route.name === 'Home') {
+                if (route.name === 'HomeTab') {
                     return <House color={color} size={size}/>
-                } else if (route.name === 'Cart') {
+                } else if (route.name === 'CartTab') {
                     return <ShoppingCart color={color} size={size}/>
                 } else {
                     return <User color={color} size={size}/>
@@ -23,7 +26,7 @@ const AppBottomTabNavigator = () => {
 
 
             },
-
+            tabBarBadge: route.name === 'CartTab' && cart.length > 0 ? cart.length : undefined,
             tabBarActiveTintColor: "tomato",
             tabBarInactiveTintColor: "grey",
             headerShown: false,
@@ -38,18 +41,24 @@ const AppBottomTabNavigator = () => {
             },
 
         })}>
-            <Tab.Screen name="Home" component={HomeStack}/>
-            <Tab.Screen name="Cart" component={CartStack}  listeners={({ navigation }) => ({
+            <Tab.Screen name="HomeTab" component={HomeStack} options={{
+                title: "Home",
+            }}/>
+            <Tab.Screen options={{
+                title: "Cart",
+            }} name="CartTab" component={CartStack}  listeners={({ navigation }) => ({
                 tabPress: (e) => {
-                    if (true) {
-                        // Prevent default navigation
-                        e.preventDefault();
-                        // Navigate to Login screen
-                        navigation.navigate('Unauthorized', { screen: 'Login' });
-                    }
+                    // if (true) {
+                    //     // Prevent default navigation
+                    //     e.preventDefault();
+                    //     // Navigate to Login screen
+                    //     navigation.navigate('Unauthorized', { screen: 'Login' });
+                    // }
                 },
             })}/>
-            <Tab.Screen name="Account" component={AccountStack}/>
+            <Tab.Screen name="AccountTab" component={AccountStack} options={{
+                title: "Account",
+            }}/>
         </Tab.Navigator>
     )
 }

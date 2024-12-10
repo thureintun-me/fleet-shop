@@ -21,7 +21,7 @@ const CardItem : React.FC<CardItemProps> = (props ) =>{
                 backgroundColor: colors.card,
                 elevation: 1,
                 paddingHorizontal: 16,
-                paddingVertical: 25,
+                paddingVertical: 30,
                 borderRadius: 8,
             }}>
                 <Image source={{
@@ -33,7 +33,7 @@ const CardItem : React.FC<CardItemProps> = (props ) =>{
                            height: 200,
                        }}/>
                 <View style={styles.itemInfoContainer}>
-                    <Text numberOfLines={3} style={{...fonts.regular,color:colors.text}}>{title}</Text>
+                    <Text numberOfLines={2} style={{...fonts.regular,color:colors.text}}>{title}</Text>
                     <Text style={{...fonts.regular, color: colors.primary}}>$ {price}</Text>
 
                     <View

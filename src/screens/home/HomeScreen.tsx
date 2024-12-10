@@ -6,6 +6,7 @@ import useFetchAllProducts from "@screens/home/hooks/useFetchAllProducts";
 import AppTitle from "@components/AppTitle";
 import {Star} from "lucide-react-native";
 import CardItem from "@components/CardItem";
+import Loading from "@screens/loading/Loading";
 
 
 const ItemSeparator = () => {
@@ -14,7 +15,7 @@ const ItemSeparator = () => {
 const HomeScreen = ({navigation, route}: HomeStackScreenProps<'HomeScreen'>) => {
 
     const {colors, fonts} = useTheme();
-    const {data, fetchNextPage, isFetchingNextPage, hasNextPage} = useFetchAllProducts();
+    const {data, fetchNextPage, isFetchingNextPage, hasNextPage, isLoading} = useFetchAllProducts();
     const products = data?.pages?.flatMap((page) => page.products);
 
     const getMoreProducts = () => {
@@ -30,6 +31,12 @@ const HomeScreen = ({navigation, route}: HomeStackScreenProps<'HomeScreen'>) => 
         });
     }
 
+
+    if(isLoading){
+        return (
+            <Loading />
+        )
+    }
 
     return (
         <SafeAreaView style={{...styles.container, backgroundColor: colors.background}}>
@@ -58,7 +65,7 @@ const HomeScreen = ({navigation, route}: HomeStackScreenProps<'HomeScreen'>) => 
                 )}
                 ListFooterComponent={() => (
                     isFetchingNextPage ? <View style={{flex: 1, justifyContent: "center", alignItems: 'center',marginVertical:20}}>
-                        <Text style={{...fonts.regular}}>Loading more...</Text>
+                        <Text style={{...fonts.regular, color:colors.text}}>Loading more...</Text>
                     </View> : null
                 )}
 
