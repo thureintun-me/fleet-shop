@@ -3,8 +3,9 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {AccountStackParamsList, options} from "@navigation/types";
 import AccountScreen from "@screens/account/AccountScreen";
 import ThemeScreen from "@screens/theme/ThemeScreen";
+import {createStackNavigator} from "@react-navigation/stack";
 
-const Stack = createNativeStackNavigator<AccountStackParamsList>();
+const Stack = createStackNavigator<AccountStackParamsList>();
 const AccountStack =() =>{
     return(
         <Stack.Navigator screenOptions={options}>

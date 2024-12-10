@@ -3,15 +3,19 @@ import {ChevronLeft} from "lucide-react-native";
 import {NativeStackHeaderLeftProps} from "@react-navigation/native-stack";
 import {useNavigation} from "@react-navigation/native";
 import React from "react";
+import {NavigationProp} from "@navigation/types";
 
 
 
 
 const HeaderLeft = ({canGoBack,tintColor,label,href} : NativeStackHeaderLeftProps) =>{
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavigationProp>();
 
-    const goBack = () => {navigation.goBack();}
+    const goBack = () => {
+        console.log("goBack");
+        navigation.goBack();
+    }
 
     return (
         canGoBack ?

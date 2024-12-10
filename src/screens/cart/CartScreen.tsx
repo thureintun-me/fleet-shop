@@ -8,7 +8,7 @@ import AppButton from "@components/AppButton";
 import EmptyCart from "@screens/cart/components/EmptyCart";
 
 
-const CartScreen = ({} : CartStackScreenProps<"CartScreen">) =>{
+const CartScreen = ({navigation,route} : CartStackScreenProps<"CartScreen">) =>{
     const cart = useFleetAppStore((state) => state.cart);
     const {colors,fonts} = useTheme();
     const { totalQuantity, totalPrice } = cart.reduce(
@@ -21,6 +21,9 @@ const CartScreen = ({} : CartStackScreenProps<"CartScreen">) =>{
         { totalQuantity: 0, totalPrice: 0 } // Initial values for totalQuantity and totalPrice
     );
 
+    const goToDeliveryScreen = () => {
+        navigation.navigate('DeliveryScreen')
+    }
 
     if(cart.length == 0){
         return (
@@ -76,7 +79,7 @@ const CartScreen = ({} : CartStackScreenProps<"CartScreen">) =>{
                 <View style={{
                     marginTop:30
                 }}>
-                    <AppButton title={"Checkout"} onPress={()=>{}} />
+                    <AppButton title={"Checkout"} onPress={goToDeliveryScreen} />
                 </View>
 
 

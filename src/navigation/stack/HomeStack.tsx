@@ -5,20 +5,22 @@ import {HomeStackParamsList, options} from "@navigation/types";
 import HomeScreen from "@screens/home/HomeScreen";
 import HeaderLeft from "@components/HeaderLeft";
 import Details from "@screens/home/Details";
+import {createStackNavigator} from "@react-navigation/stack";
 
-const Stack = createNativeStackNavigator<HomeStackParamsList>();
+const Stack = createStackNavigator<HomeStackParamsList>();
 
 const HomeStack = () =>{
     return (
-        <Stack.Navigator screenOptions={{
+        <Stack.Navigator  screenOptions={({ navigation }) => ({
             ...options,
 
-        }}>
+        })}>
             <Stack.Screen name="HomeScreen" component={HomeScreen} options={{
                 headerShown: false,
             }} />
             <Stack.Screen name="DetailsScreen"  component={Details} options={{
                 title : "Details",
+
             }} />
         </Stack.Navigator>
     );

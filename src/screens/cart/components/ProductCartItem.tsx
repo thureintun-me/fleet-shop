@@ -14,7 +14,7 @@ const ProductCartItem: React.FC<Product> = (product: Product) => {
     const removeFromCart = useFleetAppStore((state) => state.removeFromCart);
     const clearProductFromCart = useFleetAppStore((state) => state.clearProductFromCart);
 
-    console.log("selected Product ", selectedProduct);
+
 
     const onIncreasePress = () =>{
         addToCart(product)

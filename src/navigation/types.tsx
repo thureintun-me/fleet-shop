@@ -1,9 +1,15 @@
-import {NativeStackNavigationOptions, NativeStackScreenProps,} from "@react-navigation/native-stack";
+import {
+ NativeStackNavigationOptions,
+ NativeStackNavigationProp,
+ NativeStackScreenProps,
+} from "@react-navigation/native-stack";
 import HeaderLeft from "@components/HeaderLeft";
 import React from "react";
 import ThemeScreen from "@screens/theme/ThemeScreen";
 import {NavigatorScreenParams} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
+import {StackNavigationOptions, StackScreenProps} from "@react-navigation/stack";
+import {ChevronLeft} from "lucide-react-native";
 
 export type RootStackParamList = {
  MainTabs:  NavigatorScreenParams<AppTabsParamList>;
@@ -27,6 +33,7 @@ export type AccountStackParamsList = {
 
 export type CartStackParamsList = {
  CartScreen : undefined,
+ DeliveryScreen : undefined
 }
 
 
@@ -38,21 +45,27 @@ export type UnAuthorizeStackParamsList = {
 export type CartScreenNavigationProp = BottomTabNavigationProp<AppTabsParamList, "CartTab">;
 
 export type AccountStackScreenProps<T extends keyof AccountStackParamsList> =
-    NativeStackScreenProps<AccountStackParamsList, T>;
+    StackScreenProps<AccountStackParamsList, T>;
 
 export type CartStackScreenProps<T extends keyof CartStackParamsList> =
-    NativeStackScreenProps<CartStackParamsList, T>;
+    StackScreenProps<CartStackParamsList, T>;
 
 export type HomeStackScreenProps<T extends keyof HomeStackParamsList> =
-    NativeStackScreenProps<HomeStackParamsList, T>;
+    StackScreenProps<HomeStackParamsList, T>;
 
 export type UnAuthorizeStackScreenProps<T extends keyof UnAuthorizeStackParamsList> =
-    NativeStackScreenProps<UnAuthorizeStackParamsList, T>;
+    StackScreenProps<UnAuthorizeStackParamsList, T>;
 
-export const options: NativeStackNavigationOptions = {
+export type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
+export const options: StackNavigationOptions = {
  headerShown: true,
  headerTitleAlign: "center",
- headerLeft : (props) => <HeaderLeft {...props} />,
+ headerBackImage : (props) => <ChevronLeft color={props.tintColor} size={20} />
+
+
+
+ //headerLeft : (props) => <HeaderLeft {...props} />,
 
 
 };
