@@ -11,6 +11,7 @@ const AccountStack =() =>{
         <Stack.Navigator screenOptions={options}>
             <Stack.Screen name="AccountScreen" component={AccountScreen} options={{
                 headerShown: false,
+                title: "Account",
             }} />
             <Stack.Screen name="ThemeScreen" component={ThemeScreen} options={{
                title : "Theme"

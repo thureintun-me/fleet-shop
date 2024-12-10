@@ -12,6 +12,7 @@ const CartStack = () => {
         <Stack.Navigator screenOptions={options}>
             <Stack.Screen name={"CartScreen"} component={CartScreen} options={{
                 headerShown: false,
+                title: "Cart",
             }}/>
             <Stack.Screen name={"DeliveryScreen"} component={DeliveryInfo} options={{
 

@@ -1,5 +1,5 @@
 
-import {TextInput} from "react-native";
+import {TextInput, View} from "react-native";
 import {useTheme} from "@react-navigation/native";
 
 type TextAreaInputProps = {
@@ -10,6 +10,9 @@ type TextAreaInputProps = {
 const TextAreaInput : React.FC<TextAreaInputProps> = ({placeholder,value,onChangeText}) =>{
     const {colors,fonts} = useTheme()
     return(
+        <View style={{
+            alignItems:'flex-start'
+        }}>
         <TextInput
             style={{
                 width: "100%",
@@ -24,11 +27,13 @@ const TextAreaInput : React.FC<TextAreaInputProps> = ({placeholder,value,onChang
                 paddingTop:10
 
             }}
+            multiline
             value={value}
             onChangeText={onChangeText}
             placeholderTextColor={colors.border}
             placeholder={placeholder}
         />
+        </View>
     )
 }
 

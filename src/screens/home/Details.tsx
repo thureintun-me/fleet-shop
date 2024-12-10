@@ -29,7 +29,7 @@ const ProductDetails = ({navigation, route}: HomeStackScreenProps<"DetailsScreen
 
     return (
         <View style={{...styles.container}}>
-            <ScrollView style={{flex: 1}}>
+            <ScrollView style={{flex: 1,marginBottom:30}}>
                 <View style={styles.pagerWrapper}>
                     <ProductPager images={product?.images}/>
                 </View>
